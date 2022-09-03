@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		733C74B828BFE6E500F5B7F7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C74B728BFE6E500F5B7F7 /* LoginViewController.swift */; };
 		733C74BA28BFE6F100F5B7F7 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C74B928BFE6F100F5B7F7 /* RegisterViewController.swift */; };
+		735A853A28C2B22E00BCD52B /* Pods_HandMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5CB2394017B203039D6C55 /* Pods_HandMap.framework */; };
+		735A853B28C2B22E00BCD52B /* Pods_HandMap.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5CB2394017B203039D6C55 /* Pods_HandMap.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7368C22228C1E31C0044BA92 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7368C22128C1E31C0044BA92 /* Utilities.swift */; };
 		7368C22428C1EEDE0044BA92 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7368C22328C1EEDE0044BA92 /* HomeViewController.swift */; };
 		7368C22628C1F1AA0044BA92 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7368C22528C1F1AA0044BA92 /* GoogleService-Info.plist */; };
@@ -19,8 +21,21 @@
 		73EA5D3928BE6B5400E1C508 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73EA5D3728BE6B5400E1C508 /* Main.storyboard */; };
 		73EA5D3B28BE6B5700E1C508 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73EA5D3A28BE6B5700E1C508 /* Assets.xcassets */; };
 		73EA5D3E28BE6B5700E1C508 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73EA5D3C28BE6B5700E1C508 /* LaunchScreen.storyboard */; };
-		AC302C9C618B52C3908D1C58 /* Pods_HandMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5CB2394017B203039D6C55 /* Pods_HandMap.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		735A853C28C2B22E00BCD52B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				735A853B28C2B22E00BCD52B /* Pods_HandMap.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		18C6ACCE4D27391DE6FE5DD4 /* Pods-HandMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HandMap.debug.xcconfig"; path = "Target Support Files/Pods-HandMap/Pods-HandMap.debug.xcconfig"; sourceTree = "<group>"; };
@@ -47,7 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC302C9C618B52C3908D1C58 /* Pods_HandMap.framework in Frameworks */,
+				735A853A28C2B22E00BCD52B /* Pods_HandMap.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +168,7 @@
 				73EA5D2B28BE6B5400E1C508 /* Frameworks */,
 				73EA5D2C28BE6B5400E1C508 /* Resources */,
 				1CD8098E452AE75DFC92479D /* [CP] Embed Pods Frameworks */,
+				735A853C28C2B22E00BCD52B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -340,7 +356,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -394,7 +410,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
