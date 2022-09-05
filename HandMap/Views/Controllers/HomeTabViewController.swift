@@ -1,13 +1,13 @@
 //
-//  HomeViewController.swift
+//  HomeTabViewController.swift
 //  HandMap
 //
-//  Created by Акжан Калиматов on 02.09.2022.
+//  Created by Акжан Калиматов on 06.09.2022.
 //
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeTabViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,7 +15,5 @@ class HomeViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
-
 
 }

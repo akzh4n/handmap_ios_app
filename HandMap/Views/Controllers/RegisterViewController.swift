@@ -124,6 +124,8 @@ class RegisterViewController: UIViewController {
        
     }
     
+    // Show error message
+    
     func showError(_ message: String) {
         errorRegisterLabel.text = message
         errorRegisterLabel.alpha = 1
@@ -131,7 +133,7 @@ class RegisterViewController: UIViewController {
     
     func transitionToHome() {
         
-        let homeViewController = storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? HomeViewController
+        let homeViewController = storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? HomeTabViewController
         
         view.window?.rootViewController = homeViewController
         view.window?.makeKeyAndVisible()
