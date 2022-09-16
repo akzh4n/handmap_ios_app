@@ -11,7 +11,8 @@
 		733C74BA28BFE6F100F5B7F7 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C74B928BFE6F100F5B7F7 /* RegisterViewController.swift */; };
 		735A853A28C2B22E00BCD52B /* Pods_HandMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5CB2394017B203039D6C55 /* Pods_HandMap.framework */; };
 		735A853B28C2B22E00BCD52B /* Pods_HandMap.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5CB2394017B203039D6C55 /* Pods_HandMap.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		7368C22228C1E31C0044BA92 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7368C22128C1E31C0044BA92 /* Utilities.swift */; };
+		735F6DE228CF3FE600A649AB /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735F6DE128CF3FE600A649AB /* Validators.swift */; };
+		735F6DE628CF404100A649AB /* AuthProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735F6DE528CF404100A649AB /* AuthProcess.swift */; };
 		7368C22628C1F1AA0044BA92 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7368C22528C1F1AA0044BA92 /* GoogleService-Info.plist */; };
 		73DB932428C29D8000195506 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DB932328C29D8000195506 /* Constants.swift */; };
 		73EA5D3228BE6B5400E1C508 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EA5D3128BE6B5400E1C508 /* AppDelegate.swift */; };
@@ -45,7 +46,8 @@
 		4A5CB2394017B203039D6C55 /* Pods_HandMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HandMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		733C74B728BFE6E500F5B7F7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		733C74B928BFE6F100F5B7F7 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
-		7368C22128C1E31C0044BA92 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		735F6DE128CF3FE600A649AB /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
+		735F6DE528CF404100A649AB /* AuthProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProcess.swift; sourceTree = "<group>"; };
 		7368C22528C1F1AA0044BA92 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		73DB932328C29D8000195506 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		73EA5D2E28BE6B5400E1C508 /* HandMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,8 +99,9 @@
 		7368C22028C1E3090044BA92 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				7368C22128C1E31C0044BA92 /* Utilities.swift */,
 				73DB932328C29D8000195506 /* Constants.swift */,
+				735F6DE128CF3FE600A649AB /* Validators.swift */,
+				735F6DE528CF404100A649AB /* AuthProcess.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -279,8 +282,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7368C22228C1E31C0044BA92 /* Utilities.swift in Sources */,
 				73FB6CB728C67B8800CB835F /* UserViewController.swift in Sources */,
+				735F6DE628CF404100A649AB /* AuthProcess.swift in Sources */,
 				733C74B828BFE6E500F5B7F7 /* LoginViewController.swift in Sources */,
 				733C74BA28BFE6F100F5B7F7 /* RegisterViewController.swift in Sources */,
 				73EA5D3628BE6B5400E1C508 /* ViewController.swift in Sources */,
@@ -288,6 +291,7 @@
 				73EA5D3228BE6B5400E1C508 /* AppDelegate.swift in Sources */,
 				73FB6CB328C67A5C00CB835F /* HomeTabViewController.swift in Sources */,
 				73EA5D3428BE6B5400E1C508 /* SceneDelegate.swift in Sources */,
+				735F6DE228CF3FE600A649AB /* Validators.swift in Sources */,
 				73DB932428C29D8000195506 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

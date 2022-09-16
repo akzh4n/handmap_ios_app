@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
     
  
@@ -19,19 +19,33 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var loginBtn: UIButton!
     
+    @IBOutlet weak var activityView: UIActivityIndicatorView!
     
     @IBOutlet weak var registerBtn: UILabel!
     
-    @IBOutlet weak var errorLoginLabel: UILabel!
+    
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loginBtn.layer.cornerRadius = 10
+        
+        setLogButton(enabled: false)
+        activityView.isHidden = true
+        
+        
+        emailTF.delegate = self
+        passwordTF.delegate = self
+        
+        emailTF.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
+        passwordTF.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
+      
 
         self.addGesture()
         
-        setUpElements()
+        
         
     }
     
@@ -55,14 +69,61 @@ class LoginViewController: UIViewController {
     
     
     
+    override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            emailTF.becomeFirstResponder()
+       
+            NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.keyboardWillAppear(notification:)),
+            name: UIResponder.keyboardDidShowNotification, object: nil)
+            
+        }
     
-    
-    func setUpElements() {
-        errorLoginLabel.alpha = 0
         
+    override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+            emailTF.resignFirstResponder()
+            passwordTF.resignFirstResponder()
+           
+            NotificationCenter.default.removeObserver(self)
+        }
+    
+    
+    @objc func keyboardWillAppear(notification: NSNotification){
+            
+            let info = notification.userInfo!
+            let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+            
+            loginBtn.center = CGPoint(x: view.center.x,
+                                            y: view.frame.height - keyboardFrame.height - 16.0 - loginBtn.frame.height / 2)
+        
+        }
+    
+    
+    @objc func textFieldChanged(_ target:UITextField) {
+        let email = emailTF.text
+        let password = passwordTF.text
+
+        let formFilled = email != nil && email != "" && password != nil && password != ""
+        setLogButton(enabled: formFilled)
     }
     
+    func setLogButton(enabled:Bool) {
+            if enabled {
+                loginBtn.alpha = 1
+                loginBtn.isEnabled = true
+            } else {
+                loginBtn.alpha = 0.5
+                loginBtn.isEnabled = false
+            }
+        }
     
+    
+    
+    func login() {
+        
+    }
     
     @IBAction func loginBtnTapped(_ sender: Any) {
         
@@ -72,13 +133,24 @@ class LoginViewController: UIViewController {
         let email = emailTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let password = passwordTF.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
+    
+        
+        setLogButton(enabled: false)
+        loginBtn.setTitle("", for: .normal)
+        activityView.isHidden = false
+        activityView.startAnimating()
+        
         // Signing in the user
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
-            
+        
             if error != nil {
                 // Couldn't sign in
-                self.errorLoginLabel.text = error!.localizedDescription
-                self.errorLoginLabel.alpha = 1
+                self.showAlert(with: "Error", and: "The user doesn`t exist")
+                self.setLogButton(enabled: true)
+                self.loginBtn.setTitle("OK", for: .normal)
+                self.activityView.isHidden = true
+                self.activityView.stopAnimating()
+               
             }
             else {
                 
@@ -88,7 +160,17 @@ class LoginViewController: UIViewController {
                 self.view.window?.makeKeyAndVisible()
             }
         }
-        
+    }
+}
+
+extension LoginViewController {
+    func showAlert(with title: String, and message: String, completion: @escaping () -> Void = { }) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
+            completion()
+        }
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
     }
 }
     

@@ -10,5 +10,6 @@ target 'HandMap' do
 	pod 'FirebaseAuth'
 	pod 'FirebaseCore'
 	pod 'FirebaseFirestore'
+	pod 'FirebaseStorage'
 
 end
