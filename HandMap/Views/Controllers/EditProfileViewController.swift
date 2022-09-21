@@ -1,93 +1,81 @@
 //
-//  RegisterViewController.swift
+//  EditProfileViewController.swift
 //  HandMap
 //
-//  Created by Акжан Калиматов on 01.09.2022.
+//  Created by Акжан Калиматов on 17.09.2022.
 //
 
-import Foundation
 import UIKit
-import FirebaseCore
-import FirebaseFirestore
 import FirebaseAuth
 import FirebaseStorage
+import FirebaseFirestore
 
-class RegisterViewController: UIViewController, UITextFieldDelegate {
-    
-    
-    @IBOutlet weak var activityViewIn: UIActivityIndicatorView!
-    
-    @IBOutlet weak var profileImageView: UIImageView!
+class EditProfileViewController: UIViewController, UITextFieldDelegate {
+
+    @IBOutlet weak var editProfileImageView: UIImageView!
     
     
     @IBOutlet weak var changeImageBtn: UIButton!
     
     
-    @IBOutlet weak var usernameTextField: UITextField!
-    
-    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var editUsernameTF: UITextField!
     
     
-    @IBOutlet weak var passwordTextField: UITextField!
-    
-    @IBOutlet weak var repasswordTextField: UITextField!
-
-    
-    @IBOutlet weak var registerBtn: UIButton!
+    @IBOutlet weak var editEmailTF: UITextField!
     
     
+    @IBOutlet weak var editPasswordTF: UITextField!
+    
+    
+    @IBOutlet weak var saveBtn: UIButton!
+    
+    
+    @IBOutlet weak var editCardView: UIView!
     
     
     
+    @IBOutlet weak var editActivityInView: UIActivityIndicatorView!
     
+    
+    let userUID = Auth.auth().currentUser?.uid
+    let db = Firestore.firestore()
     
     var imagePicker:UIImagePickerController!
     var urlString = ""
     
-  
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        
-        activityViewIn.isHidden = true
-        registerBtn.layer.cornerRadius = 10
         
         
-        setRegButton(enabled: false)
-        
-        usernameTextField.delegate = self
-        emailTextField.delegate = self
-        passwordTextField.delegate = self
-        repasswordTextField.delegate = self
-                
-        usernameTextField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
-        emailTextField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
-        passwordTextField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
-        repasswordTextField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
+        editActivityInView.isHidden = true
         
         
-        profileImageView.layer.cornerRadius = 40
-        profileImageView.layer.masksToBounds = true
-        profileImageView.layer.borderWidth = 3
-        profileImageView.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0).cgColor
+        editUsernameTF.delegate = self
+        editEmailTF.delegate = self
+        editPasswordTF.delegate = self
+   
+        
+        editProfileImageView.layer.cornerRadius = 50
+        editProfileImageView.layer.masksToBounds = true
+        editProfileImageView.layer.borderWidth = 3
+        editProfileImageView.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
+        
+        editCardView.layer.cornerRadius = 20
+        saveBtn.layer.cornerRadius = 10
         
         
         
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tapGesture)
         
+        self.editFetchUser()
         
-            
-       
-       
-    }
+
    
+    }
     
-
-
+    
     override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
        
@@ -137,29 +125,43 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
             view.frame.origin.y = 0
     }
     
-
-    @objc func textFieldChanged(_ target:UITextField) {
-        let username = usernameTextField.text
-        let email = emailTextField.text
-        let password = passwordTextField.text
-        let repassword = repasswordTextField.text
-        let formFilled = username != nil && username != "" && email != nil && email != "" && password != nil && password != "" && repassword != nil && repassword != ""
-        setRegButton(enabled: formFilled)
-    }
-
     
-    func setRegButton(enabled:Bool) {
-            if enabled {
-                registerBtn.alpha = 1
-                registerBtn.isEnabled = true
-            } else {
-                registerBtn.alpha = 0.5
-                registerBtn.isEnabled = false
+    func editFetchUser() {
+                db.collection("newusers").document(userUID!).getDocument { [self] snapshot, error in
+                if error != nil {
+                    print("Error")
+                }
+                else {
+                    let storage = Storage.storage()
+                    var reference: StorageReference!
+                    reference = storage.reference(forURL: "gs://handmap-ios.appspot.com/useravatars/\(userUID!)")
+                    reference.downloadURL { (url, error) in
+                        let data = NSData(contentsOf: url!)
+                        let image = UIImage(data: data! as Data)
+                        self.editProfileImageView.image = image
+
+                    }
+                    
+                    let userName = snapshot?.get("username") as? String
+                    let passWord = snapshot?.get("password") as? String
+                    let email = snapshot?.get("email") as? String
+                    
+                    self.editUsernameTF.text = userName
+                    self.editEmailTF.text = email
+                    self.editPasswordTF.text = passWord
+                    
+                    
+                    
+                }
+                
+                
             }
+            
         }
-        
+
     
-    @IBAction func changeImageBtnPressed(_ sender: Any) {
+    
+    @IBAction func editChangeImageBtnPressed(_ sender: Any) {
         
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
@@ -169,12 +171,10 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    
-    
     func upload(currentUserId: String, photo: UIImage, completion: @escaping (Result<URL, Error>) -> Void) {
         let ref = Storage.storage().reference().child("useravatars").child(currentUserId)
         
-        guard let imageData = profileImageView.image?.jpegData(compressionQuality: 0.4) else { return }
+        guard let imageData = editProfileImageView.image?.jpegData(compressionQuality: 0.4) else { return }
         
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpeg"
@@ -195,49 +195,35 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-   
-    
-
-    func register(email: String?, password: String?, completion: @escaping (AuthResult) -> Void) {
+    func updateUser(username: String?, email: String?, password: String?, completion: @escaping (AuthResult) -> Void) {
         
-        guard Validators.isFilledReg(username: usernameTextField.text,
-                                  email: emailTextField.text,
-                                  password: passwordTextField.text,
-                                  repassword: repasswordTextField.text) else {
+        guard Validators.isFilledEditUser(username: editUsernameTF.text,
+                                  email: editEmailTF.text,
+                                  password: editPasswordTF.text) else {
                                     completion(.failure(AuthError.notFilled))
                                     return
         }
         guard let email = email, let password = password else {
             completion(.failure(AuthError.unknownError))
-            return  
+            return
         }
         
         guard Validators.isSimpleEmail(email) else {
             completion(.failure(AuthError.invalidEmail))
             return
         }
-        
-        guard Validators.isPasswordMatch(password: passwordTextField.text, repassword: repasswordTextField.text) else {
-            completion(.failure(AuthError.passwordNotMatch))
-            return
-        }
-        
-        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
-            guard let result = result else {
-                completion(.failure(error!))
-                return
-            }
-            self.upload(currentUserId: result.user.uid, photo: self.profileImageView.image!) { (myresult) in
+    
+            self.upload(currentUserId: userUID!, photo: self.editProfileImageView.image!) { (myresult) in
                 switch myresult {
                 case .success(let url):
                     self.urlString = url.absoluteString
                     let db = Firestore.firestore()
-                    db.collection("newusers").document(result.user.uid).setData([
-                        "username": self.usernameTextField.text!,
-                        "email": self.emailTextField.text!,
-                        "password": self.passwordTextField.text!,
+                    db.collection("newusers").document(self.userUID!).updateData([
+                        "username": self.editUsernameTF.text!,
+                        "email": self.editEmailTF.text!,
+                        "password": self.editPasswordTF.text!,
                         "avatarURL": url.absoluteString,
-                        "uid": result.user.uid
+                        "uid": self.userUID!
                     ]) { (error) in
                         if let error = error {
                             completion(.failure(error))
@@ -249,42 +235,65 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
                 }
             }
             
-            
-        }
     }
     
+   
     
     
     
-    
-    @IBAction func registerBtnTapped(_ sender: Any) {
-        setRegButton(enabled: false)
-        registerBtn.setTitle("", for: .normal)
-        activityViewIn.isHidden = false
-        activityViewIn.startAnimating()
+    @IBAction func saveBtnPressed(_ sender: Any) {
         
-        register(email: emailTextField.text, password: passwordTextField.text) { (result) in
+        saveBtn.setTitle("", for: .normal)
+        editActivityInView.isHidden = false
+        editActivityInView.startAnimating()
+        
+        
+        updateUser(username: editUsernameTF.text, email: editEmailTF.text, password: editPasswordTF.text) { (result) in
             switch result {
             case .success:
-                self.showAlert(with: "Success", and: "You successfully registered!", completion: {
-                    self.setRegButton(enabled: true)
-                    self.registerBtn.setTitle("Sign Up", for: .normal)
-                    self.activityViewIn.isHidden = true
-                    self.activityViewIn.stopAnimating()
+                self.showAlert(with: "Success", and: "You successfully updated profile!", completion: {
+                    
+                    self.saveBtn.setTitle("Save", for: .normal)
+                    self.editActivityInView.isHidden = true
+                    self.editActivityInView.stopAnimating()
                     self.transitionToHome()
                 })
             case .failure(let error):
-                self.setRegButton(enabled: true)
-                self.registerBtn.setTitle("Sign Up", for: .normal)
-                self.activityViewIn.isHidden = true
-                self.activityViewIn.stopAnimating()
+             
+                self.saveBtn.setTitle("Save", for: .normal)
+                self.editActivityInView.isHidden = true
+                self.editActivityInView.stopAnimating()
                 self.showAlert(with: "Error", and: error.localizedDescription)
             }
+        }
+        
+
+
+        
+    }
+    
+    func changeEmailAndPassword(email: String?, password: String?) {
+        let user = Auth.auth().currentUser
+        user?.updateEmail(to: email!) { error in
+        if error != nil {
+            print(AuthError.unknownError)
+        } else {
+           // Email updated
+           }
+        }
+        user?.updatePassword(to: password!) { error in
+        if error != nil {
+            print(AuthError.unknownError)
+        } else {
+           // Password updated
+           }
         }
        
     }
     
-   
+  
+    
+    
     
     func transitionToHome() {
         
@@ -295,20 +304,22 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     }
     
 
-
 }
 
-extension RegisterViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+
+
+
+extension EditProfileViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         picker.dismiss(animated: true, completion: nil)
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else { return }
-        profileImageView.image = image
+        editProfileImageView.image = image
     }
 }
 
 
-extension RegisterViewController {
+extension EditProfileViewController {
     func showAlert(with title: String, and message: String, completion: @escaping () -> Void = { }) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { (_) in

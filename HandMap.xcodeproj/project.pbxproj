@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		732721B628DBB8E700292133 /* UIResponder+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732721B528DBB8E700292133 /* UIResponder+Utils.swift */; };
 		733C74B828BFE6E500F5B7F7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C74B728BFE6E500F5B7F7 /* LoginViewController.swift */; };
 		733C74BA28BFE6F100F5B7F7 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C74B928BFE6F100F5B7F7 /* RegisterViewController.swift */; };
 		735A853A28C2B22E00BCD52B /* Pods_HandMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A5CB2394017B203039D6C55 /* Pods_HandMap.framework */; };
@@ -14,13 +15,14 @@
 		735F6DE228CF3FE600A649AB /* Validators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735F6DE128CF3FE600A649AB /* Validators.swift */; };
 		735F6DE628CF404100A649AB /* AuthProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735F6DE528CF404100A649AB /* AuthProcess.swift */; };
 		7368C22628C1F1AA0044BA92 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7368C22528C1F1AA0044BA92 /* GoogleService-Info.plist */; };
-		73DB932428C29D8000195506 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73DB932328C29D8000195506 /* Constants.swift */; };
+		73C8250F28D5F51500C7ADF9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C8250E28D5F51500C7ADF9 /* Constants.swift */; };
 		73EA5D3228BE6B5400E1C508 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EA5D3128BE6B5400E1C508 /* AppDelegate.swift */; };
 		73EA5D3428BE6B5400E1C508 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EA5D3328BE6B5400E1C508 /* SceneDelegate.swift */; };
 		73EA5D3628BE6B5400E1C508 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EA5D3528BE6B5400E1C508 /* ViewController.swift */; };
 		73EA5D3928BE6B5400E1C508 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73EA5D3728BE6B5400E1C508 /* Main.storyboard */; };
 		73EA5D3B28BE6B5700E1C508 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73EA5D3A28BE6B5700E1C508 /* Assets.xcassets */; };
 		73EA5D3E28BE6B5700E1C508 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 73EA5D3C28BE6B5700E1C508 /* LaunchScreen.storyboard */; };
+		73F0ED7628D5CE4900268381 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F0ED7528D5CE4900268381 /* EditProfileViewController.swift */; };
 		73FB6CB328C67A5C00CB835F /* HomeTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB6CB228C67A5C00CB835F /* HomeTabViewController.swift */; };
 		73FB6CB528C67B7700CB835F /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB6CB428C67B7700CB835F /* MapViewController.swift */; };
 		73FB6CB728C67B8800CB835F /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73FB6CB628C67B8800CB835F /* UserViewController.swift */; };
@@ -44,12 +46,13 @@
 		18C6ACCE4D27391DE6FE5DD4 /* Pods-HandMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HandMap.debug.xcconfig"; path = "Target Support Files/Pods-HandMap/Pods-HandMap.debug.xcconfig"; sourceTree = "<group>"; };
 		279F500B0AFB9D7D25906084 /* Pods-HandMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HandMap.release.xcconfig"; path = "Target Support Files/Pods-HandMap/Pods-HandMap.release.xcconfig"; sourceTree = "<group>"; };
 		4A5CB2394017B203039D6C55 /* Pods_HandMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HandMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		732721B528DBB8E700292133 /* UIResponder+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Utils.swift"; sourceTree = "<group>"; };
 		733C74B728BFE6E500F5B7F7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		733C74B928BFE6F100F5B7F7 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		735F6DE128CF3FE600A649AB /* Validators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validators.swift; sourceTree = "<group>"; };
 		735F6DE528CF404100A649AB /* AuthProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProcess.swift; sourceTree = "<group>"; };
 		7368C22528C1F1AA0044BA92 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		73DB932328C29D8000195506 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		73C8250E28D5F51500C7ADF9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		73EA5D2E28BE6B5400E1C508 /* HandMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73EA5D3128BE6B5400E1C508 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73EA5D3328BE6B5400E1C508 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +61,7 @@
 		73EA5D3A28BE6B5700E1C508 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		73EA5D3D28BE6B5700E1C508 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		73EA5D3F28BE6B5700E1C508 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		73F0ED7528D5CE4900268381 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		73FB6CB228C67A5C00CB835F /* HomeTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabViewController.swift; sourceTree = "<group>"; };
 		73FB6CB428C67B7700CB835F /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		73FB6CB628C67B8800CB835F /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +96,7 @@
 				73FB6CB228C67A5C00CB835F /* HomeTabViewController.swift */,
 				73FB6CB428C67B7700CB835F /* MapViewController.swift */,
 				73FB6CB628C67B8800CB835F /* UserViewController.swift */,
+				73F0ED7528D5CE4900268381 /* EditProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -99,9 +104,10 @@
 		7368C22028C1E3090044BA92 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				73DB932328C29D8000195506 /* Constants.swift */,
 				735F6DE128CF3FE600A649AB /* Validators.swift */,
 				735F6DE528CF404100A649AB /* AuthProcess.swift */,
+				73C8250E28D5F51500C7ADF9 /* Constants.swift */,
+				732721B528DBB8E700292133 /* UIResponder+Utils.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -288,11 +294,13 @@
 				733C74BA28BFE6F100F5B7F7 /* RegisterViewController.swift in Sources */,
 				73EA5D3628BE6B5400E1C508 /* ViewController.swift in Sources */,
 				73FB6CB528C67B7700CB835F /* MapViewController.swift in Sources */,
+				732721B628DBB8E700292133 /* UIResponder+Utils.swift in Sources */,
 				73EA5D3228BE6B5400E1C508 /* AppDelegate.swift in Sources */,
 				73FB6CB328C67A5C00CB835F /* HomeTabViewController.swift in Sources */,
+				73F0ED7628D5CE4900268381 /* EditProfileViewController.swift in Sources */,
 				73EA5D3428BE6B5400E1C508 /* SceneDelegate.swift in Sources */,
 				735F6DE228CF3FE600A649AB /* Validators.swift in Sources */,
-				73DB932428C29D8000195506 /* Constants.swift in Sources */,
+				73C8250F28D5F51500C7ADF9 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

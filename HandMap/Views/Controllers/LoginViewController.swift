@@ -41,6 +41,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         emailTF.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
         passwordTF.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
+        
+        
+        
+        
+        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tapGesture)
       
 
         self.addGesture()
@@ -63,43 +69,61 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @objc func labelTapped(_ tap: UITapGestureRecognizer) {
 
             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-            let SecondVC = storyboard.instantiateViewController(withIdentifier: "RegisterViewController") as! RegisterViewController
-            self.navigationController?.pushViewController(SecondVC, animated: true)
+            let RegisterVC = (storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.registerViewController) as? RegisterViewController)!
+            self.navigationController?.pushViewController(RegisterVC, animated: true)
        }
     
     
     
     override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
-            emailTF.becomeFirstResponder()
+            
        
             NotificationCenter.default.addObserver(
             self,
-            selector: #selector(self.keyboardWillAppear(notification:)),
-            name: UIResponder.keyboardDidShowNotification, object: nil)
+            selector: #selector(self.keyboardWillShow(sender:)),
+            name: UIResponder.keyboardWillShowNotification, object: nil)
+    
+            NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(self.keyboardWillHide(notification:)),
+            name: UIResponder.keyboardWillHideNotification, object: nil)
+        
             
         }
     
         
     override func viewWillDisappear(_ animated: Bool) {
             super.viewWillDisappear(animated)
-            emailTF.resignFirstResponder()
-            passwordTF.resignFirstResponder()
-           
+            
             NotificationCenter.default.removeObserver(self)
         }
     
     
-    @objc func keyboardWillAppear(notification: NSNotification){
-            
-            let info = notification.userInfo!
-            let keyboardFrame: CGRect = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-            
-            loginBtn.center = CGPoint(x: view.center.x,
-                                            y: view.frame.height - keyboardFrame.height - 16.0 - loginBtn.frame.height / 2)
+    @objc func keyboardWillShow(sender: NSNotification) {
+            guard let userInfo = sender.userInfo,
+                  let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
+                  let currentTextField = UIResponder.currentFirst() as? UITextField else { return }
+
+            print("foo - userInfo: \(userInfo)")
+            print("foo - keyboardFrame: \(keyboardFrame)")
+            print("foo - currentTextField: \(currentTextField)")
         
+        
+        let keyboardTopY = keyboardFrame.cgRectValue.origin.y
+        let convertedTextFieldFrame = view.convert(currentTextField.frame, from: currentTextField.superview)
+        let textFieldBottomY = convertedTextFieldFrame.origin.y + convertedTextFieldFrame.size.height
+
+        // if textField bottom is below keyboard bottom - bump the frame up
+        if textFieldBottomY > keyboardTopY {
+            let textBoxY = convertedTextFieldFrame.origin.y
+            let newFrameY = (textBoxY - keyboardTopY / 2) * -1
+            view.frame.origin.y = newFrameY
         }
-    
+    }
+    @objc func keyboardWillHide(notification: NSNotification) {
+            view.frame.origin.y = 0
+    }
     
     @objc func textFieldChanged(_ target:UITextField) {
         let email = emailTF.text
@@ -126,7 +150,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func loginBtnTapped(_ sender: Any) {
-        
+        view.endEditing(true)
         // TODO: Validate Text Fields
         
         // Create cleaned versions of the text field

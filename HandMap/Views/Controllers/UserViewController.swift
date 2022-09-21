@@ -21,27 +21,111 @@ class UserViewController: UIViewController {
     @IBOutlet weak var userAvatarImage: UIImageView!
     
    
+    @IBOutlet weak var editProfileGo: UILabel!
+    
+    
+    @IBOutlet weak var sharedBtn: UILabel!
+    
+    
     @IBOutlet weak var cardView: UIView!
+    
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        fetchUser()
-        userAvatarImage.layer.cornerRadius = 50
+        self.fetchUser()
+        
+        
+        
+        sharedBtn.isUserInteractionEnabled = true
+        let shareTap = UITapGestureRecognizer(target: self, action: #selector(shareBtnPressed(_:)))
+                sharedBtn.addGestureRecognizer(shareTap)
+        
+        
+        
+        userAvatarImage.layer.cornerRadius = 40
         userAvatarImage.layer.masksToBounds = true
         userAvatarImage.layer.borderWidth = 3
-        userAvatarImage.layer.borderColor = UIColor(red: 0.1, green: 1, blue: 0.1, alpha: 1.0).cgColor
+        userAvatarImage.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor
         
         cardView.layer.cornerRadius = 20
+        
+        
+        
+        self.addGesture()
         
         
     }
     
     
+    @objc func shareBtnPressed(_ sender: Any) {
+        
+        // Setting description
+           let firstActivityItem = "HandMap - is simple application by using Map API and Firebase."
+
+           // Setting url
+           let secondActivityItem : NSURL = NSURL(string: "http://apple.com/")!
+           
+           // If you want to use an image
+           let image : UIImage = UIImage(named: "icon")!
+           let activityViewController : UIActivityViewController = UIActivityViewController(
+               activityItems: [firstActivityItem, secondActivityItem, image], applicationActivities: nil)
+           
+           // This lines is for the popover you need to show in iPad
+           activityViewController.popoverPresentationController?.sourceView = (sender as! UIButton)
+           
+           // This line remove the arrow of the popover to show in iPad
+           activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.down
+           activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 150, y: 150, width: 0, height: 0)
+           
+           // Pre-configuring activity items
+           activityViewController.activityItemsConfiguration = [
+           UIActivity.ActivityType.message
+           ] as? UIActivityItemsConfigurationReading
+           
+           // Anything you want to exclude
+           activityViewController.excludedActivityTypes = [
+               UIActivity.ActivityType.postToWeibo,
+               UIActivity.ActivityType.print,
+               UIActivity.ActivityType.assignToContact,
+               UIActivity.ActivityType.saveToCameraRoll,
+               UIActivity.ActivityType.addToReadingList,
+               UIActivity.ActivityType.postToFlickr,
+               UIActivity.ActivityType.postToVimeo,
+               UIActivity.ActivityType.postToTencentWeibo,
+               UIActivity.ActivityType.postToFacebook
+           ]
+           
+           activityViewController.isModalInPresentation = true
+           self.present(activityViewController, animated: true, completion: nil)
+        
+        
+    }
     
-  
+    
+    func addGesture() {
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.labelTapped(_:)))
+           tap.numberOfTapsRequired = 1
+           self.editProfileGo.isUserInteractionEnabled = true
+           self.editProfileGo.addGestureRecognizer(tap)
+       }
+    
+    
+    @objc func labelTapped(_ tap: UITapGestureRecognizer) {
+
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let EditUserVC = (storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.editUserViewController) as? EditProfileViewController)!
+            self.navigationController?.pushViewController(EditUserVC, animated: true)
+       }
+    
+    
+    
+ 
+    
     
     // To get data from database
     

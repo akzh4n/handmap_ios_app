@@ -21,6 +21,15 @@ class Validators {
         return true
     }
     
+    static func isFilledEditUser(username: String?, email: String?, password: String?) -> Bool {
+        guard !(username ?? "").isEmpty,
+            !(email ?? "").isEmpty,
+            !(password ?? "").isEmpty
+            else {
+                return false
+        }
+        return true
+    }
    
     
     static func isPasswordMatch(password: String?, repassword: String?) -> Bool {
