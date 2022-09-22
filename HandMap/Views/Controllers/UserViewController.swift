@@ -61,6 +61,8 @@ class UserViewController: UIViewController {
     }
     
     
+    // Share info about my app with your friends :D
+    
     @objc func shareBtnPressed(_ sender: Any) {
         
         // Setting description
@@ -106,6 +108,9 @@ class UserViewController: UIViewController {
     }
     
     
+    
+    // Transition to Edit Profile View
+    
     func addGesture() {
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.labelTapped(_:)))
@@ -115,6 +120,7 @@ class UserViewController: UIViewController {
        }
     
     
+    // There are no button, but we have this function, just click label to activate 
     @objc func labelTapped(_ tap: UITapGestureRecognizer) {
 
             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)

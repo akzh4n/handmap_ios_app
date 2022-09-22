@@ -1,0 +1,84 @@
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "0Qj-6j-fbu"; */
+"0Qj-6j-fbu.title" = " ";
+
+/* Class = "UILabel"; text = "Register "; ObjectID = "1M6-5U-V7o"; */
+"1M6-5U-V7o.text" = "Регистрация";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "4gC-dW-iLo"; */
+"4gC-dW-iLo.placeholder" = "Email";
+
+/* Class = "UILabel"; text = "Share with me"; ObjectID = "7WY-cl-4qg"; */
+"7WY-cl-4qg.text" = "Поделиться";
+
+/* Class = "UIButton"; normalTitle = "Upload new picture"; ObjectID = "CjO-2e-e3s"; */
+"CjO-2e-e3s.normalTitle" = "Загрузить новое фото";
+
+/* Class = "UITextField"; placeholder = "New Email"; ObjectID = "DBo-z5-Ugd"; */
+"DBo-z5-Ugd.placeholder" = "Новый Email";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "HG8-yG-bQf"; */
+"HG8-yG-bQf.placeholder" = "Пароль";
+
+/* Class = "UILabel"; text = "Hello, mansteinuser"; ObjectID = "IxO-G7-LfB"; */
+"IxO-G7-LfB.text" = "Привет, mansteinuser";
+
+/* Class = "UITabBarItem"; title = "Profile"; ObjectID = "Lgw-cG-JwX"; */
+"Lgw-cG-JwX.title" = "Профиль";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "Maf-k4-CRU"; */
+"Maf-k4-CRU.placeholder" = "Пароль";
+
+/* Class = "UIBarButtonItem"; title = " "; ObjectID = "P03-Ca-WKt"; */
+"P03-Ca-WKt.title" = " ";
+
+/* Class = "UILabel"; text = "Edit Profile"; ObjectID = "PnD-xh-Zdo"; */
+"PnD-xh-Zdo.text" = "Изменить профиль";
+
+/* Class = "UILabel"; text = "Welcome"; ObjectID = "Tuy-th-8pM"; */
+"Tuy-th-8pM.text" = "Добро пожаловать";
+
+/* Class = "UITabBarItem"; title = "Map"; ObjectID = "U67-p7-d26"; */
+"U67-p7-d26.title" = "Карта";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "VvE-kW-gT5"; */
+"VvE-kW-gT5.normalTitle" = "Сохранить";
+
+/* Class = "UILabel"; text = "Edit Profile"; ObjectID = "YQQ-aw-NXc"; */
+"YQQ-aw-NXc.text" = "Изменить профиль";
+
+/* Class = "UILabel"; text = "You don't have an account?"; ObjectID = "ZyT-N4-6nK"; */
+"ZyT-N4-6nK.text" = "У вас нету аккаунта?";
+
+/* Class = "UILabel"; text = "Create new account"; ObjectID = "bCu-EQ-JJb"; */
+"bCu-EQ-JJb.text" = "Создай новый аккаунт";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "g1b-PP-iDT"; */
+"g1b-PP-iDT.placeholder" = "Email";
+
+/* Class = "UIBarButtonItem"; title = "Location"; ObjectID = "hLH-zd-7GQ"; */
+"hLH-zd-7GQ.title" = "Локация";
+
+/* Class = "UITextField"; placeholder = "Confirm password"; ObjectID = "i50-WX-ixg"; */
+"i50-WX-ixg.placeholder" = "Подтвердить пароль";
+
+/* Class = "UITextField"; placeholder = "New Username"; ObjectID = "inU-8l-es9"; */
+"inU-8l-es9.placeholder" = "Новый имя пользователя";
+
+/* Class = "UITextField"; placeholder = "Username"; ObjectID = "jlG-8h-doT"; */
+"jlG-8h-doT.placeholder" = "Имя пользователя";
+
+/* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "jlx-LG-oh5"; */
+"jlx-LG-oh5.normalTitle" = "Зарегистрироваться";
+
+/* Class = "UITextField"; placeholder = "New Password"; ObjectID = "m3I-v8-Ggv"; */
+"m3I-v8-Ggv.placeholder" = "Новый пароль";
+
+/* Class = "UILabel"; text = "Please login to use the application features"; ObjectID = "omA-fw-gCa"; */
+"omA-fw-gCa.text" = "Пожалуйста, войдите в систему, чтобы использовать функции приложения";
+
+/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "qAi-LI-gZg"; */
+"qAi-LI-gZg.normalTitle" = "OK";
+
+/* Class = "UIButton"; normalTitle = "Upload new picture"; ObjectID = "yI2-Sh-NOq"; */
+"yI2-Sh-NOq.normalTitle" = "Загрузить новое фото";

@@ -40,8 +40,11 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     
     
+    // Image picker
     
     var imagePicker:UIImagePickerController!
+    
+    // Image url
     var urlString = ""
     
   
@@ -76,6 +79,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         
         
         
+        // To remove keyboard by clicking view
+        
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tapGesture)
         
@@ -87,7 +92,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
    
     
 
-
+    // Keyboard settings to hide and show
+    
     override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
        
@@ -112,14 +118,13 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     
     
+    // Special code to automatically resizing view with keyboard
+    
     @objc func keyboardWillShow(sender: NSNotification) {
             guard let userInfo = sender.userInfo,
                   let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
                   let currentTextField = UIResponder.currentFirst() as? UITextField else { return }
 
-            print("foo - userInfo: \(userInfo)")
-            print("foo - keyboardFrame: \(keyboardFrame)")
-            print("foo - currentTextField: \(currentTextField)")
         
         
         let keyboardTopY = keyboardFrame.cgRectValue.origin.y
@@ -138,6 +143,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     }
     
 
+    
+    // Function to access the button after filling in the textfields
+    
     @objc func textFieldChanged(_ target:UITextField) {
         let username = usernameTextField.text
         let email = emailTextField.text
@@ -159,6 +167,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         }
         
     
+    
+    // Change image by clicking button
+    
     @IBAction func changeImageBtnPressed(_ sender: Any) {
         
         let imagePickerController = UIImagePickerController()
@@ -170,6 +181,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     
     
+    
+    // Uploading image in firebase storage by user id and image url
     
     func upload(currentUserId: String, photo: UIImage, completion: @escaping (Result<URL, Error>) -> Void) {
         let ref = Storage.storage().reference().child("useravatars").child(currentUserId)
@@ -197,7 +210,8 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
    
     
-
+    // Register function with validators and setting user profile images in data collections
+    
     func register(email: String?, password: String?, completion: @escaping (AuthResult) -> Void) {
         
         guard Validators.isFilledReg(username: usernameTextField.text,
@@ -256,6 +270,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     
     
     
+    // Sign up process
     
     @IBAction func registerBtnTapped(_ sender: Any) {
         setRegButton(enabled: false)
@@ -285,6 +300,7 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
     }
     
    
+    // Go to home
     
     func transitionToHome() {
         
@@ -298,6 +314,9 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
 
 }
 
+
+// Special extension to pick image from gallery
+
 extension RegisterViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
@@ -307,6 +326,8 @@ extension RegisterViewController: UINavigationControllerDelegate, UIImagePickerC
     }
 }
 
+
+// Extenstion for alerts
 
 extension RegisterViewController {
     func showAlert(with title: String, and message: String, completion: @escaping () -> Void = { }) {

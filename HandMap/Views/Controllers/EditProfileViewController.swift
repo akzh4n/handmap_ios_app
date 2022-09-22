@@ -37,6 +37,8 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var editActivityInView: UIActivityIndicatorView!
     
     
+    
+    // Accessing to database
     let userUID = Auth.auth().currentUser?.uid
     let db = Firestore.firestore()
     
@@ -65,9 +67,13 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
         saveBtn.layer.cornerRadius = 10
         
         
+        // To remove keyboard by tapping view
         
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tapGesture)
+        
+        
+        // Get data from database
         
         self.editFetchUser()
         
@@ -76,6 +82,8 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    // Keyboard settings to hide and show
+
     override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
        
@@ -100,14 +108,14 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
     
     
     
+    
+    
+    // Special code to automatically resizing view with keyboard
+    
     @objc func keyboardWillShow(sender: NSNotification) {
             guard let userInfo = sender.userInfo,
                   let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
                   let currentTextField = UIResponder.currentFirst() as? UITextField else { return }
-
-            print("foo - userInfo: \(userInfo)")
-            print("foo - keyboardFrame: \(keyboardFrame)")
-            print("foo - currentTextField: \(currentTextField)")
         
         
         let keyboardTopY = keyboardFrame.cgRectValue.origin.y
@@ -126,6 +134,8 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    
+    // Get data about user from database, that`s need
     func editFetchUser() {
                 db.collection("newusers").document(userUID!).getDocument { [self] snapshot, error in
                 if error != nil {
@@ -160,7 +170,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
         }
 
     
-    
+    // Button to change profile image
     @IBAction func editChangeImageBtnPressed(_ sender: Any) {
         
         let imagePickerController = UIImagePickerController()
@@ -170,6 +180,8 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    
+    // If we want to change profile image, we need upload new :D
     
     func upload(currentUserId: String, photo: UIImage, completion: @escaping (Result<URL, Error>) -> Void) {
         let ref = Storage.storage().reference().child("useravatars").child(currentUserId)
@@ -195,6 +207,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    // Finally, just function to fully update user info after editting
     func updateUser(username: String?, email: String?, password: String?, completion: @escaping (AuthResult) -> Void) {
         
         guard Validators.isFilledEditUser(username: editUsernameTF.text,
@@ -241,6 +254,8 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
     
     
     
+    // After changing some info about user, we can save it
+    
     @IBAction func saveBtnPressed(_ sender: Any) {
         
         saveBtn.setTitle("", for: .normal)
@@ -252,7 +267,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
             switch result {
             case .success:
                 self.showAlert(with: "Success", and: "You successfully updated profile!", completion: {
-                    
+                    self.changeEmailAndPassword(email: self.editEmailTF.text, password: self.editPasswordTF.text)
                     self.saveBtn.setTitle("Save", for: .normal)
                     self.editActivityInView.isHidden = true
                     self.editActivityInView.stopAnimating()
@@ -271,6 +286,9 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
 
         
     }
+    
+    
+    // This function necessary, because we also need change auth settings
     
     func changeEmailAndPassword(email: String?, password: String?) {
         let user = Auth.auth().currentUser
@@ -293,7 +311,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
     
   
     
-    
+    // Just go to home view
     
     func transitionToHome() {
         
@@ -309,6 +327,8 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate {
 
 
 
+// Extension to pick image from gallery
+
 extension EditProfileViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
@@ -318,6 +338,8 @@ extension EditProfileViewController: UINavigationControllerDelegate, UIImagePick
     }
 }
 
+
+// Extension for alerts
 
 extension EditProfileViewController {
     func showAlert(with title: String, and message: String, completion: @escaping () -> Void = { }) {

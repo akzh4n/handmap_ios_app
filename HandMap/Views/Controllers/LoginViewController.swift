@@ -44,6 +44,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         
         
+        // To remove keyboard by tapping view
         
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tapGesture)
@@ -56,6 +57,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    
+    // Go to the registrations page
     
     func addGesture() {
 
@@ -75,6 +78,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     
     
+    // Keyboard settings to hide and show
+    
     override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
             
@@ -92,7 +97,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             
         }
     
-        
     override func viewWillDisappear(_ animated: Bool) {
             super.viewWillDisappear(animated)
             
@@ -100,16 +104,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     
     
+    
+    
+    
+    // Special code to automatically resizing view with keyboard
     @objc func keyboardWillShow(sender: NSNotification) {
             guard let userInfo = sender.userInfo,
                   let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
                   let currentTextField = UIResponder.currentFirst() as? UITextField else { return }
 
-            print("foo - userInfo: \(userInfo)")
-            print("foo - keyboardFrame: \(keyboardFrame)")
-            print("foo - currentTextField: \(currentTextField)")
-        
-        
         let keyboardTopY = keyboardFrame.cgRectValue.origin.y
         let convertedTextFieldFrame = view.convert(currentTextField.frame, from: currentTextField.superview)
         let textFieldBottomY = convertedTextFieldFrame.origin.y + convertedTextFieldFrame.size.height
@@ -121,9 +124,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             view.frame.origin.y = newFrameY
         }
     }
+    
     @objc func keyboardWillHide(notification: NSNotification) {
             view.frame.origin.y = 0
     }
+    
+    
+    
+    
+    // Function to access the button after filling in the textfields
     
     @objc func textFieldChanged(_ target:UITextField) {
         let email = emailTF.text
@@ -145,9 +154,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     
     
-    func login() {
-        
-    }
+    
+    // Login process
     
     @IBAction func loginBtnTapped(_ sender: Any) {
         view.endEditing(true)
@@ -186,6 +194,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
 }
+
+
+// Extenstion for special alerts
 
 extension LoginViewController {
     func showAlert(with title: String, and message: String, completion: @escaping () -> Void = { }) {
