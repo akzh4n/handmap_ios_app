@@ -60,30 +60,31 @@ You can try and take for yourself the experience of using the functionality of t
 
  - Screen Sharing
  ```sh
-
+@objc func shareBtnPressed(_ sender: Any) {
+        
+       
            let firstActivityItem = "HandMap - is simple application by using Map API and Firebase."
 
-           
            let secondActivityItem : NSURL = NSURL(string: "http://apple.com/")!
            
-           
+     
            let image : UIImage = UIImage(named: "icon")!
            let activityViewController : UIActivityViewController = UIActivityViewController(
                activityItems: [firstActivityItem, secondActivityItem, image], applicationActivities: nil)
            
-    
+
            activityViewController.popoverPresentationController?.sourceView = (sender as! UIButton)
            
-     
+
            activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.down
            activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 150, y: 150, width: 0, height: 0)
            
-           
+  
            activityViewController.activityItemsConfiguration = [
            UIActivity.ActivityType.message
            ] as? UIActivityItemsConfigurationReading
            
-           
+          
            activityViewController.excludedActivityTypes = [
                UIActivity.ActivityType.postToWeibo,
                UIActivity.ActivityType.print,
@@ -98,7 +99,9 @@ You can try and take for yourself the experience of using the functionality of t
            
            activityViewController.isModalInPresentation = true
            self.present(activityViewController, animated: true, completion: nil)
-}
+        
+        
+    }
 
 ``` 
 
