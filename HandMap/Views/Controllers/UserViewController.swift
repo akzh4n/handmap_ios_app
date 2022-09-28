@@ -143,6 +143,9 @@ class UserViewController: UIViewController {
                     print("Error")
                 }
                 else {
+                    
+                    let userName = snapshot?.get("username") as? String
+                    self.userNameLabel.text = "Hello, " + (userName)!
                     let storage = Storage.storage()
                     var reference: StorageReference!
                     reference = storage.reference(forURL: "gs://handmap-ios.appspot.com/useravatars/\(userUID!)")
@@ -153,10 +156,8 @@ class UserViewController: UIViewController {
 
                     }
                     
-                    let userName = snapshot?.get("username") as? String
-                   
                     
-                    self.userNameLabel.text = "Hello, " + (userName)!
+                    
                     
                     
                     

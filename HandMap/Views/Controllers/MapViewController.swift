@@ -43,7 +43,7 @@ class MapViewController: UIViewController, UISearchBarDelegate, MKMapViewDelegat
         
         // Change map view
         
-        mainMapView.mapType = .satellite
+        mainMapView.mapType = .standard
   
     }
     

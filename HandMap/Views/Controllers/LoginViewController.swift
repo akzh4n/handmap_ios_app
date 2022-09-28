@@ -36,6 +36,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         activityView.isHidden = true
         
         
+        
         emailTF.delegate = self
         passwordTF.delegate = self
         
